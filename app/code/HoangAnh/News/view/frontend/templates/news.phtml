@@ -1,0 +1,49 @@
+<?php
+$url = "https://vnexpress.net/rss/tin-moi-nhat.rss"; // xmld.xml contains above data
+// $feeds = file_get_contents($url);
+// $rss = simplexml_load_string($feeds);
+
+$doc = new DOMDocument();
+$doc->load($url);
+$Feeds = array();
+
+foreach ($doc->getElementsByTagName('item') as $node) {
+    $itemRSS = array (
+        'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+        'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
+        'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
+        'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue
+        );
+    array_push($Feeds, $itemRSS);
+}
+// print_r($items);
+?>
+<p><?php
+    // var_dump($Feeds) 
+ ?></p>
+
+
+<?php 
+                    
+                        foreach($Feeds as $temp){ 
+                            ?>
+                <div class="content" style="border: 2px solid black;">
+        <div class="title">
+            <p style="font-weight:700;
+                    font-size: 20px;"> Tiêu đề : <?php echo $temp['title'] ?></p>
+        </div>
+        <div class="desc">
+            <p><?php echo $temp['desc'] ?></p>
+        </div>
+        <div class="link">
+            <a href=<?php
+                    $linkNew = '"'.$temp['link'].'"';
+                    print_r($linkNew);  ?>><?php echo $temp['link'] ?></a>
+        </div>
+        <div class="date">
+            <p><?php echo $temp['date'] ?></p>
+        </div>
+    </div>
+    <hr>
+                            <?php }
+                    ?>

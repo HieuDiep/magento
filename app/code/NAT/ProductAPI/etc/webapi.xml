@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:NAT_ProductAPI:etc/webapi.xsd">
+        <route url="/V2/product/getProductById/:id" method="GET">
+            <service class="NAT\ProductAPI\Api\ProductRepositoryInterface" method="getProductById"/>
+            <resources>
+                <resource ref="anonymous"/>
+            </resources>
+        </route>
+</routes>
